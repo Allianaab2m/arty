@@ -4,14 +4,15 @@ import { EventEmitter } from "eventemitter3"
 import ReconnectingWebSocket from "reconnecting-websocket"
 import { Note } from "./note"
 import { User } from "./user"
+import { MiNotification } from "./types/misskey"
 
 type AnyOf<T extends Record<any, any>> = T[keyof T]
 
 export type Channels = {
-	// main: {
-	// 	params: null;
-	// 	events: {
-	// 		notification: (payload: Notification) => void;
+	main: {
+		params: null;
+		events: {
+			notification: (payload: MiNotification) => void;
 	// 		mention: (payload: Note) => void;
 	// 		reply: (payload: Note) => void;
 	// 		renote: (payload: Note) => void;
@@ -43,9 +44,9 @@ export type Channels = {
 	// 		}) => void;
 	// 		driveFileCreated: (payload: DriveFile) => void;
 	// 		readAntenna: (payload: Antenna) => void;
-	// 	};
-	// 	receives: null;
-	// };
+		};
+		receives: null;
+	};
 	homeTimeline: {
 		params: null;
 		events: {
