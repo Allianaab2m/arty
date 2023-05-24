@@ -79,6 +79,13 @@ export class Bot extends User {
     })
   }
 
+  async reply(noteId: string, message: string): Promise<void> {
+    await this.client.request("notes/create", {
+      replyId: noteId,
+      text: message
+    })
+  }
+
   async notePoll(pollItems: string[], message: string): Promise<void> {
     console.log("Not implemented")
   }
