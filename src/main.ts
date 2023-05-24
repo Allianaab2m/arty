@@ -6,18 +6,18 @@ dotenv.config()
 
 let options = {
   origin: "",
-  token: ""
+  token: "",
 }
 
 if (process.env.NODE_ENV === "development") {
   options = {
     origin: "https://m.c30.life",
-    token: process.env.MI_TOKEN_MC30 ? process.env.MI_TOKEN_MC30 : ""
+    token: process.env.MI_TOKEN_MC30 ? process.env.MI_TOKEN_MC30 : "",
   }
 } else {
   options = {
     origin: "https://misskey.art",
-    token: process.env.MI_TOKEN_ART ? process.env.MI_TOKEN_ART : ""
+    token: process.env.MI_TOKEN_ART ? process.env.MI_TOKEN_ART : "",
   }
 }
 
@@ -32,13 +32,13 @@ client.useChannel("main").on("notification", (n) => {
 
     const command = {
       prompt: callText[0].split(" ")[1],
-      args: callText.slice(1)
+      args: callText.slice(1),
     }
 
-    commandHandler({ 
-      me: client.me, 
-      note: n.note, 
-      command
+    commandHandler({
+      me: client.me,
+      note: n.note,
+      command,
     })
   }
 })

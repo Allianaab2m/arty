@@ -61,28 +61,28 @@ export class Bot extends User {
       // TODO: Will change client options
       visibility: "home",
       visibleUserIds: [],
-      text: message
+      text: message,
     })
     return note.createdNote
   }
 
   async renote(noteId: string): Promise<void> {
     await this.client.request("notes/create", {
-      renoteId: noteId
+      renoteId: noteId,
     })
   }
 
   async quoteRenote(noteId: string, quoteMessage: string): Promise<void> {
     await this.client.request("notes/create", {
       text: quoteMessage,
-      renoteId: noteId
+      renoteId: noteId,
     })
   }
 
   async reply(noteId: string, message: string): Promise<void> {
     await this.client.request("notes/create", {
       replyId: noteId,
-      text: message
+      text: message,
     })
   }
 
