@@ -1,5 +1,6 @@
 import { Bot } from "./user"
 import { EventEmitter } from "events"
+import { Channels, Connection, Stream } from "./stream"
 import axios, { AxiosInstance } from "axios"
 import { MiApiType } from "./types/misskey"
 
@@ -56,8 +57,10 @@ export class Client extends TypedEventEmitter<ClientEventTypes> {
 
     this.origin = params.origin
     this.me = null
+    this.token = params.token
+
     this.axios = axios.create({
-      baseURL: `https://${this.origin}/api`,
+      baseURL: `${this.origin}/api`,
       headers: {
         "Content-Type": "application/json",
       },
@@ -73,8 +76,13 @@ export class Client extends TypedEventEmitter<ClientEventTypes> {
     const me = new Bot(this, data)
     this.emit("ready", me)
     this.me = me
+  }
 
-    //TODO: ws connection create
+  useChannel<C extends keyof Channels>(channel: C): Connection<Channels[C]> {
+    if (!this.token) throw new Error("No token provided.")
+    const stream = new Stream(this.origin, { token: this.token })
+    const ch = stream.useChannel(channel)
+    return ch
   }
 
   public request<

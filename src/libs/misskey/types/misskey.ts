@@ -40,3 +40,21 @@ export type MiApiType = {
     res: NoParams
   }
 }
+
+type MiNotificationBase = {
+  id: string
+  createdAt: string
+  userId: string
+  user: User
+  note: Note
+}
+
+export type MiNotification = ({
+  type: "reaction"
+  reaction: string
+} | {
+  type: "mention"
+} | {
+  type: "reply"
+}) & MiNotificationBase
+
