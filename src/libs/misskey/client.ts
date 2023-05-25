@@ -17,7 +17,7 @@ type ClientParams = {
 }
 
 type ClientEventTypes = {
-  "ready": [me: Bot]
+  ready: [me: Bot]
 }
 
 class TypedEventEmitter<TEvents extends Record<string, any>> {
@@ -85,26 +85,28 @@ export class Client extends TypedEventEmitter<ClientEventTypes> {
     return ch
   }
 
-  public request<
-    E extends keyof MiApiType,
-    P extends MiApiType[E]['req'],
-  >(endpoint: E, params: P = {} as P): Promise<MiApiType[E]['res']> {
-      const promise = new Promise((resolve, reject) => {
-        this.axios.interceptors.response.use((res) => {
+  public request<E extends keyof MiApiType, P extends MiApiType[E]["req"]>(
+    endpoint: E,
+    params: P = {} as P
+  ): Promise<MiApiType[E]["res"]> {
+    const promise = new Promise((resolve, reject) => {
+      this.axios.interceptors.response.use(
+        (res) => {
           console.log(res)
           resolve(res.data)
           return res
-        }, (err) => {
+        },
+        (err) => {
           console.error(err)
           return reject(err)
-        })
+        }
+      )
 
-        this.axios.post(
-          `${endpoint}`, 
-          JSON.stringify({ ...params, i: this.token })
-        )
-      })
-      return promise as any
-    }
+      this.axios.post(
+        `${endpoint}`,
+        JSON.stringify({ ...params, i: this.token })
+      )
+    })
+    return promise as any
+  }
 }
-

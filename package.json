@@ -6,24 +6,29 @@
     "start": "node dist/main.js",
     "style": "prettier --write src/**/*.ts && eslint --fix --ext .ts src",
     "build": "tsc",
-    "dev": "ts-node src/main.ts"
+    "dev": "cross-env NODE_ENV=development ts-node src/main.ts"
   },
   "author": "Alliana",
   "license": "MIT",
+  "dependencies": {
+    "axios": "^1.4.0",
+    "dotenv": "^16.0.3",
+    "eventemitter3": "^5.0.1",
+    "kuroshiro": "^1.2.0",
+    "kuroshiro-analyzer-kuromoji": "^1.1.0",
+    "reconnecting-websocket": "^4.4.0",
+    "ws": "^8.13.0"
+  },
   "devDependencies": {
     "@types/node": "^20.2.3",
     "@typescript-eslint/eslint-plugin": "^5.59.6",
     "@typescript-eslint/parser": "^5.59.6",
+    "cross-env": "^7.0.3",
     "eslint": "^8.40.0",
     "eslint-config-prettier": "^8.8.0",
     "prettier": "^2.8.8",
-    "ts-node": "^10.9.1"
-  },
-  "dependencies": {
-    "axios": "^1.4.0",
-    "eventemitter3": "^5.0.1",
-    "reconnecting-websocket": "^4.4.0",
-    "typescript": "^5.0.4",
-    "ws": "^8.13.0"
+    "ts-node": "^10.9.1",
+    "ts-pattern": "^4.3.0",
+    "typescript": "^5.0.4"
   }
 }

@@ -69,7 +69,7 @@ export class Note {
   public url: string
   public myreaction?: Reaction | null = null
 
-  constructor (params: NoteParams) {
+  constructor(params: NoteParams) {
     this.id = params.id
     this.createdAt = params.createdAt
     this.userId = params.userId
@@ -85,7 +85,7 @@ export class Note {
   async reaction(client: Client, reaction: string) {
     await client.request("notes/reactions/create", {
       noteId: this.id,
-      reaction
+      reaction,
     })
   }
 }

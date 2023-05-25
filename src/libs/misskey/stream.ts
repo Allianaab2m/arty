@@ -9,159 +9,167 @@ import { MiNotification } from "./types/misskey"
 type AnyOf<T extends Record<any, any>> = T[keyof T]
 
 export type Channels = {
-	main: {
-		params: null;
-		events: {
-			notification: (payload: MiNotification) => void;
-	// 		mention: (payload: Note) => void;
-	// 		reply: (payload: Note) => void;
-	// 		renote: (payload: Note) => void;
-	// 		follow: (payload: User) => void; // 自分が他人をフォローしたとき
-	// 		followed: (payload: User) => void; // 他人が自分をフォローしたとき
-	// 		unfollow: (payload: User) => void; // 自分が他人をフォロー解除したとき
-	// 		meUpdated: (payload: MeDetailed) => void;
-	// 		pageEvent: (payload: PageEvent) => void;
-	// 		urlUploadFinished: (payload: { marker: string; file: DriveFile; }) => void;
-	// 		readAllNotifications: () => void;
-	// 		unreadNotification: (payload: Notification) => void;
-	// 		unreadMention: (payload: Note['id']) => void;
-	// 		readAllUnreadMentions: () => void;
-	// 		unreadSpecifiedNote: (payload: Note['id']) => void;
-	// 		readAllUnreadSpecifiedNotes: () => void;
-	// 		readAllMessagingMessages: () => void;
-	// 		messagingMessage: (payload: MessagingMessage) => void;
-	// 		unreadMessagingMessage: (payload: MessagingMessage) => void;
-	// 		readAllAntennas: () => void;
-	// 		unreadAntenna: (payload: Antenna) => void;
-	// 		readAllAnnouncements: () => void;
-	// 		myTokenRegenerated: () => void;
-	// 		reversiNoInvites: () => void;
-	// 		signin: (payload: FIXME) => void;
-	// 		registryUpdated: (payload: {
-	// 			scope?: string[];
-	// 			key: string;
-	// 			value: any | null;
-	// 		}) => void;
-	// 		driveFileCreated: (payload: DriveFile) => void;
-	// 		readAntenna: (payload: Antenna) => void;
-		};
-		receives: null;
-	};
-	homeTimeline: {
-		params: null;
-		events: {
-			note: (payload: Note) => void;
-		};
-		receives: null;
-	};
-	localTimeline: {
-		params: null;
-		events: {
-			note: (payload: Note) => void;
-		};
-		receives: null;
-	};
-	hybridTimeline: {
-		params: null;
-		events: {
-			note: (payload: Note) => void;
-		};
-		receives: null;
-	};
-	globalTimeline: {
-		params: null;
-		events: {
-			note: (payload: Note) => void;
-		};
-		receives: null;
-	};
-	// messaging: {
-	// 	params: {
-	// 		otherparty?: User['id'] | null;
-	// 		group?: UserGroup['id'] | null;
-	// 	};
-	// 	events: {
-	// 		message: (payload: MessagingMessage) => void;
-	// 		deleted: (payload: MessagingMessage['id']) => void;
-	// 		read: (payload: MessagingMessage['id'][]) => void;
-	// 		typers: (payload: User[]) => void;
-	// 	};
-	// 	receives: {
-	// 		read: {
-	// 			id: MessagingMessage['id'];
-	// 		};
-	// 	};
-	// };
-	// serverStats: {
-	// 	params: null;
-	// 	events: {
-	// 		stats: (payload: FIXME) => void;
-	// 	};
-	// 	receives: {
-	// 		requestLog: {
-	// 			id: string | number;
-	// 			length: number;
-	// 		};
-	// 	};
-	// };
-	// queueStats: {
-	// 	params: null;
-	// 	events: {
-	// 		stats: (payload: FIXME) => void;
-	// 	};
-	// 	receives: {
-	// 		requestLog: {
-	// 			id: string | number;
-	// 			length: number;
-	// 		};
-	// 	};
-	// };
-};
-
-export type NoteUpdatedEvent = {
-	id: Note['id'];
-	type: 'reacted';
-	body: {
-		reaction: string;
-		userId: User['id'];
-	};
-} | {
-	id: Note['id'];
-	type: 'unreacted';
-	body: {
-		reaction: string;
-		userId: User['id'];
-	};
-} | {
-	id: Note['id'];
-	type: 'deleted';
-	body: {
-		deletedAt: string;
-	}
-} | {
-	id: Note['id'];
-	type: 'pollVoted';
-	body: {
-		choice: number;
-		userId: User['id'];
-	}
+  main: {
+    params: null
+    events: {
+      notification: (payload: MiNotification) => void
+      // 		mention: (payload: Note) => void;
+      // 		reply: (payload: Note) => void;
+      // 		renote: (payload: Note) => void;
+      // 		follow: (payload: User) => void; // 自分が他人をフォローしたとき
+      // 		followed: (payload: User) => void; // 他人が自分をフォローしたとき
+      // 		unfollow: (payload: User) => void; // 自分が他人をフォロー解除したとき
+      // 		meUpdated: (payload: MeDetailed) => void;
+      // 		pageEvent: (payload: PageEvent) => void;
+      // 		urlUploadFinished: (payload: { marker: string; file: DriveFile; }) => void;
+      // 		readAllNotifications: () => void;
+      // 		unreadNotification: (payload: Notification) => void;
+      // 		unreadMention: (payload: Note['id']) => void;
+      // 		readAllUnreadMentions: () => void;
+      // 		unreadSpecifiedNote: (payload: Note['id']) => void;
+      // 		readAllUnreadSpecifiedNotes: () => void;
+      // 		readAllMessagingMessages: () => void;
+      // 		messagingMessage: (payload: MessagingMessage) => void;
+      // 		unreadMessagingMessage: (payload: MessagingMessage) => void;
+      // 		readAllAntennas: () => void;
+      // 		unreadAntenna: (payload: Antenna) => void;
+      // 		readAllAnnouncements: () => void;
+      // 		myTokenRegenerated: () => void;
+      // 		reversiNoInvites: () => void;
+      // 		signin: (payload: FIXME) => void;
+      // 		registryUpdated: (payload: {
+      // 			scope?: string[];
+      // 			key: string;
+      // 			value: any | null;
+      // 		}) => void;
+      // 		driveFileCreated: (payload: DriveFile) => void;
+      // 		readAntenna: (payload: Antenna) => void;
+    }
+    receives: null
+  }
+  homeTimeline: {
+    params: null
+    events: {
+      note: (payload: Note) => void
+    }
+    receives: null
+  }
+  localTimeline: {
+    params: null
+    events: {
+      note: (payload: Note) => void
+    }
+    receives: null
+  }
+  hybridTimeline: {
+    params: null
+    events: {
+      note: (payload: Note) => void
+    }
+    receives: null
+  }
+  globalTimeline: {
+    params: null
+    events: {
+      note: (payload: Note) => void
+    }
+    receives: null
+  }
+  // messaging: {
+  // 	params: {
+  // 		otherparty?: User['id'] | null;
+  // 		group?: UserGroup['id'] | null;
+  // 	};
+  // 	events: {
+  // 		message: (payload: MessagingMessage) => void;
+  // 		deleted: (payload: MessagingMessage['id']) => void;
+  // 		read: (payload: MessagingMessage['id'][]) => void;
+  // 		typers: (payload: User[]) => void;
+  // 	};
+  // 	receives: {
+  // 		read: {
+  // 			id: MessagingMessage['id'];
+  // 		};
+  // 	};
+  // };
+  // serverStats: {
+  // 	params: null;
+  // 	events: {
+  // 		stats: (payload: FIXME) => void;
+  // 	};
+  // 	receives: {
+  // 		requestLog: {
+  // 			id: string | number;
+  // 			length: number;
+  // 		};
+  // 	};
+  // };
+  // queueStats: {
+  // 	params: null;
+  // 	events: {
+  // 		stats: (payload: FIXME) => void;
+  // 	};
+  // 	receives: {
+  // 		requestLog: {
+  // 			id: string | number;
+  // 			length: number;
+  // 		};
+  // 	};
+  // };
 }
 
-export function urlQuery(obj: Record<string, string | number | boolean | undefined>): string {
-	const params = Object.entries(obj)
-		.filter(([, v]) => Array.isArray(v) ? v.length : v !== undefined)
-		// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-		.reduce((a, [k, v]) => (a[k] = v!, a), {} as Record<string, string | number | boolean>);
+export type NoteUpdatedEvent =
+  | {
+      id: Note["id"]
+      type: "reacted"
+      body: {
+        reaction: string
+        userId: User["id"]
+      }
+    }
+  | {
+      id: Note["id"]
+      type: "unreacted"
+      body: {
+        reaction: string
+        userId: User["id"]
+      }
+    }
+  | {
+      id: Note["id"]
+      type: "deleted"
+      body: {
+        deletedAt: string
+      }
+    }
+  | {
+      id: Note["id"]
+      type: "pollVoted"
+      body: {
+        choice: number
+        userId: User["id"]
+      }
+    }
 
-	return Object.entries(params)
-		.map((e) => `${e[0]}=${encodeURIComponent(e[1])}`)
-		.join('&');
+export function urlQuery(
+  obj: Record<string, string | number | boolean | undefined>
+): string {
+  const params = Object.entries(obj)
+    .filter(([, v]) => (Array.isArray(v) ? v.length : v !== undefined))
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    .reduce(
+      (a, [k, v]) => ((a[k] = v!), a),
+      {} as Record<string, string | number | boolean>
+    )
+
+  return Object.entries(params)
+    .map((e) => `${e[0]}=${encodeURIComponent(e[1])}`)
+    .join("&")
 }
-
 
 export type BroadcastEvents = {
-	noteUpdated: (payload: NoteUpdatedEvent) => void;
-};
+  noteUpdated: (payload: NoteUpdatedEvent) => void
+}
 
 type StreamEvents = {
   _connected_: void
@@ -176,9 +184,13 @@ export class Stream extends EventEmitter<StreamEvents> {
   private nonSharedConnections: NonSharedConnection[] = []
   private idCounter = 0
 
-  constructor(origin: string, user: { token: string } | null, options?: {
-    WebSocket?: any
-  }) {
+  constructor(
+    origin: string,
+    user: { token: string } | null,
+    options?: {
+      WebSocket?: any
+    }
+  ) {
     super()
 
     this.genId = this.genId.bind(this)
@@ -193,20 +205,26 @@ export class Stream extends EventEmitter<StreamEvents> {
     this.onMessage = this.onMessage.bind(this)
     this.send = this.send.bind(this)
     this.close = this.close.bind(this)
-    
+
     options = options ?? {}
 
     const query = urlQuery({
       i: user?.token,
-      _t: Date.now()
+      _t: Date.now(),
     })
 
-    const wsOrigin = origin.replace("http://", "ws://").replace("https://", "wss://")
+    const wsOrigin = origin
+      .replace("http://", "ws://")
+      .replace("https://", "wss://")
 
-    this.stream = new ReconnectingWebSocket(`${wsOrigin}/streaming?${query}`, [], {
-      minReconnectionDelay: 1,
-      WebSocket: require("ws")
-    })
+    this.stream = new ReconnectingWebSocket(
+      `${wsOrigin}/streaming?${query}`,
+      [],
+      {
+        minReconnectionDelay: 1,
+        WebSocket: require("ws"),
+      }
+    )
     this.stream.addEventListener("open", this.onOpen)
     this.stream.addEventListener("close", this.onClose)
     this.stream.addEventListener("message", this.onMessage)
@@ -216,7 +234,11 @@ export class Stream extends EventEmitter<StreamEvents> {
     return (++this.idCounter).toString()
   }
 
-  public useChannel<C extends keyof Channels>(channel: C, params?: Channels[C]['params'], name?: string): Connection<Channels[C]> {
+  public useChannel<C extends keyof Channels>(
+    channel: C,
+    params?: Channels[C]["params"],
+    name?: string
+  ): Connection<Channels[C]> {
     if (params) {
       return this.connectToChannel(channel, params)
     } else {
@@ -224,8 +246,11 @@ export class Stream extends EventEmitter<StreamEvents> {
     }
   }
 
-  private useSharedConnection<C extends keyof Channels>(channel: C, name?: string): SharedConnection<Channels[C]> {
-    let pool = this.sharedConnectionPools.find(p => p.channel === channel)
+  private useSharedConnection<C extends keyof Channels>(
+    channel: C,
+    name?: string
+  ): SharedConnection<Channels[C]> {
+    let pool = this.sharedConnectionPools.find((p) => p.channel === channel)
 
     if (pool == null) {
       pool = new Pool(this, channel, this.genId())
@@ -238,21 +263,35 @@ export class Stream extends EventEmitter<StreamEvents> {
   }
 
   public removeSharedConnection(connection: SharedConnection): void {
-    this.sharedConnections = this.sharedConnections.filter(c => c !== connection)
+    this.sharedConnections = this.sharedConnections.filter(
+      (c) => c !== connection
+    )
   }
 
   public removeSharedConnectionPool(pool: Pool): void {
-    this.sharedConnectionPools = this.sharedConnectionPools.filter(p => p !== pool)
+    this.sharedConnectionPools = this.sharedConnectionPools.filter(
+      (p) => p !== pool
+    )
   }
 
-  private connectToChannel<C extends keyof Channels>(channel: C, params: Channels[C]['params']): NonSharedConnection<Channels[C]> {
-    const connection = new NonSharedConnection(this, channel, this.genId(), params)
+  private connectToChannel<C extends keyof Channels>(
+    channel: C,
+    params: Channels[C]["params"]
+  ): NonSharedConnection<Channels[C]> {
+    const connection = new NonSharedConnection(
+      this,
+      channel,
+      this.genId(),
+      params
+    )
     this.nonSharedConnections.push(connection)
     return connection
   }
 
   public disconnectToChannel(connection: NonSharedConnection): void {
-    this.nonSharedConnections = this.nonSharedConnections.filter(c => c !== connection)
+    this.nonSharedConnections = this.nonSharedConnections.filter(
+      (c) => c !== connection
+    )
   }
 
   private onOpen(): void {
@@ -281,10 +320,10 @@ export class Stream extends EventEmitter<StreamEvents> {
       const id = body.id
       let connections: Connection[]
 
-      connections = this.sharedConnections.filter(c => c.id === id)
+      connections = this.sharedConnections.filter((c) => c.id === id)
 
       if (connections.length === 0) {
-        const found = this.nonSharedConnections.find(c => c.id === id)
+        const found = this.nonSharedConnections.find((c) => c.id === id)
         if (found) connections = [found]
       }
 
@@ -300,12 +339,17 @@ export class Stream extends EventEmitter<StreamEvents> {
   public send(typeOrPayload: string): void
   public send(typeOrPayload: string, payload: any): void
   public send(typeOrPayload: Record<string, any> | any[]): void
-  public send(typeOrPayload: string | Record<string, any> | any[], payload?: any): void {
+  public send(
+    typeOrPayload: string | Record<string, any> | any[],
+    payload?: any
+  ): void {
     if (typeof typeOrPayload === "string") {
-      this.stream.send(JSON.stringify({
-        type: typeOrPayload,
-        ...(payload === undefined ? {} : { body: payload })
-      }))
+      this.stream.send(
+        JSON.stringify({
+          type: typeOrPayload,
+          ...(payload === undefined ? {} : { body: payload }),
+        })
+      )
       return
     }
 
@@ -371,7 +415,7 @@ class Pool {
     this.isConnected = true
     this.stream.send("connect", {
       channel: this.channel,
-      id: this.id
+      id: this.id,
     })
   }
 
@@ -382,7 +426,9 @@ class Pool {
   }
 }
 
-export abstract class Connection<Channel extends AnyOf<Channels> = any> extends EventEmitter<Channel['events']> {
+export abstract class Connection<
+  Channel extends AnyOf<Channels> = any
+> extends EventEmitter<Channel["events"]> {
   public channel: string
   protected stream: Stream
   public abstract id: string
@@ -391,7 +437,7 @@ export abstract class Connection<Channel extends AnyOf<Channels> = any> extends 
   public inCount = 0
   public outCount = 0
 
-  constructor(stream: Stream, channel: string, name?:string) {
+  constructor(stream: Stream, channel: string, name?: string) {
     super()
     this.send = this.send.bind(this)
 
@@ -400,11 +446,14 @@ export abstract class Connection<Channel extends AnyOf<Channels> = any> extends 
     this.name = name
   }
 
-  public send<T extends keyof Channel['receives']>(type: T, body: Channel['receives'][T]): void {
-    this.stream.send('channel', {
+  public send<T extends keyof Channel["receives"]>(
+    type: T,
+    body: Channel["receives"][T]
+  ): void {
+    this.stream.send("channel", {
       id: this.id,
       type,
-      body
+      body,
     })
 
     this.outCount++
@@ -413,7 +462,9 @@ export abstract class Connection<Channel extends AnyOf<Channels> = any> extends 
   public abstract dispose(): void
 }
 
-class SharedConnection<Channel extends AnyOf<Channels> = any> extends Connection<Channel> {
+class SharedConnection<
+  Channel extends AnyOf<Channels> = any
+> extends Connection<Channel> {
   private pool: Pool
 
   public get id(): string {
@@ -430,17 +481,24 @@ class SharedConnection<Channel extends AnyOf<Channels> = any> extends Connection
   }
 
   public dispose(): void {
-      this.pool.dec()
+    this.pool.dec()
     this.removeAllListeners()
     this.stream.removeSharedConnection(this)
   }
 }
 
-class NonSharedConnection<Channel extends AnyOf<Channels> = any> extends Connection<Channel> {
+class NonSharedConnection<
+  Channel extends AnyOf<Channels> = any
+> extends Connection<Channel> {
   public id: string
-  protected params: Channel['params']
+  protected params: Channel["params"]
 
-  constructor(stream: Stream, channel: string, id: string, params: Channel['params']) {
+  constructor(
+    stream: Stream,
+    channel: string,
+    id: string,
+    params: Channel["params"]
+  ) {
     super(stream, channel)
 
     this.connect = this.connect.bind(this)
@@ -453,10 +511,10 @@ class NonSharedConnection<Channel extends AnyOf<Channels> = any> extends Connect
   }
 
   public connect(): void {
-    this.stream.send('connect', {
+    this.stream.send("connect", {
       channel: this.channel,
       id: this.id,
-      params: this.params
+      params: this.params,
     })
   }
 
