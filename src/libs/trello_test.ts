@@ -1,5 +1,5 @@
 import * as mf from 'mf'
-import { trello as tr } from '../../libs/trello.ts'
+import { trello as tr } from './trello.ts'
 import { Stub } from 'https://deno.land/x/rhum@v2.2.0/mod.ts'
 import { assertRejects, assertThrows } from 'std/testing/asserts.ts'
 import { returnsNext, stub } from 'std/testing/mock.ts'
