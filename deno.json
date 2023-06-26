@@ -1,0 +1,27 @@
+{
+  "$id": "https://deno.land/x/deno/cli/schemas/config-file.v1.json",
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "compilerOptions": {
+    "noErrorTruncation": true
+  },
+  "lint": {
+    "include": ["src/"],
+    "rules": {
+      "tags": ["recommended"],
+      "exclude": ["no-unused-vars"]
+    }
+  },
+  "fmt": {
+    "useTabs": false,
+    "indentWidth": 2,
+    "semiColons": false,
+    "singleQuote": true
+  },
+  "lock": false,
+  "imports": {
+    "std/": "https://deno.land/x/std@0.190.0/",
+    "misskey-js": "npm:misskey-js",
+    "ky": "https://deno.land/x/ky@v0.33.3/source/index.ts",
+    "mf": "https://deno.land/x/mock_fetch@0.3.0/mod.ts"
+  }
+}

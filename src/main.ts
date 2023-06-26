@@ -1,44 +1,24 @@
-import { Client } from "./libs/misskey/client"
-import { commandHandler } from "./commands"
-import * as dotenv from "dotenv"
+import {
+  createNote,
+  MiApiCredential,
+  userFollow,
+  useStreamChannel,
+} from './libs/misskey.ts'
 
-dotenv.config()
+let credential: MiApiCredential
 
-let options = {
-  origin: "",
-  token: "",
-}
-
-if (process.env.NODE_ENV === "development") {
-  options = {
-    origin: "https://m.c30.life",
-    token: process.env.MI_TOKEN_MC30 ? process.env.MI_TOKEN_MC30 : "",
+if (Deno.env.get('DENO_ENV') === 'development') {
+  credential = {
+    origin: 'https://m.c30.life',
+    token: Deno.env.get('MI_TOKEN_MC30') ?? '',
   }
 } else {
-  options = {
-    origin: "https://misskey.art",
-    token: process.env.MI_TOKEN_ART ? process.env.MI_TOKEN_ART : "",
+  credential = {
+    origin: 'https://misskey.art',
+    token: Deno.env.get('MI_TOKEN_ART') ?? '',
   }
 }
 
-const client = new Client(options)
-
-client.login(options.token)
-
-client.useChannel("main").on("notification", (n) => {
-  if (n.type === "mention") {
-    const callText = n.note.text?.split("\n")
-    if (!callText) return
-
-    const command = {
-      prompt: callText[0].split(" ")[1],
-      args: callText.slice(1),
-    }
-
-    commandHandler({
-      me: client.me,
-      note: n.note,
-      command,
-    })
-  }
+useStreamChannel(credential)('main').on('followed', async (user) => {
+  await userFollow(credential, user)
 })
