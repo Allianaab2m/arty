@@ -25,6 +25,7 @@ jobs:
       - uses: denoland/setup-deno@main
         with:
           deno-version: ${{ env.DENO_VERSION }}
+      - name: Run fmt
         run: |
           deno fmt --check
   lint:
@@ -34,6 +35,7 @@ jobs:
       - uses: denoland/setup-deno@main
         with:
           deno-version: ${{ env.DENO_VERSION }}
+      - name: Run lint
         run: |
           deno lint
   test:
@@ -41,6 +43,9 @@ jobs:
     steps:
       - uses: actions/checkout@master
       - uses: denoland/setup-deno@main
+        with:
+          deno-version: ${{ env.DENO_VERSION }}
+      - name: Run test
         run: |
           deno test -A
 
