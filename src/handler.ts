@@ -61,12 +61,12 @@ export const replyHandler = async (note: Note): Promise<HandledNote> => {
     })
   }
 
-  const 
+  // const
 
-  return {
+  /* return {
     raw: {
       note,
       text: note.text,
     },
-  }
+  } */
 }
