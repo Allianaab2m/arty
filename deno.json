@@ -19,7 +19,7 @@
   },
   "lock": false,
   "imports": {
-    "std/": "https://deno.land/x/std@0.190.0/",
+    "std/": "https://deno.land/std@0.190.0/",
     "misskey-js": "npm:misskey-js",
     "ky": "https://deno.land/x/ky@v0.33.3/source/index.ts",
     "mf": "https://deno.land/x/mock_fetch@0.3.0/mod.ts"

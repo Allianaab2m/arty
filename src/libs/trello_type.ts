@@ -93,7 +93,7 @@ type Label = {
   color: string
 }
 
-type List = {
+export type List = {
   id: string
   name: string
   closed: boolean
