@@ -4,30 +4,51 @@ on:
   push:
     paths:
       - 'src/**'
+      - .github/workflows/ci.yml
 
   pull_request:
     branches:
       - main
+
+env:
+  DENO_VERSION: '1.34.3'
 
 defaults:
   run:
     working-directory: src
 
 jobs:
-  test:
+  format:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@master
       - uses: denoland/setup-deno@main
         with:
-          deno-version: "1.34.3"
-      - name: Run fmt
+          deno-version: ${{ env.DENO_VERSION }}
         run: |
           deno fmt --check
-      - name: Run lint
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+      - uses: denoland/setup-deno@main
+        with:
+          deno-version: ${{ env.DENO_VERSION }}
         run: |
           deno lint
-
-      - name: Run tests
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+      - uses: denoland/setup-deno@main
         run: |
           deno test -A
+
+  # create_release:
+  #   needs:
+  #     - format
+  #     - lint
+  #     - test
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: actions/checkout@master
